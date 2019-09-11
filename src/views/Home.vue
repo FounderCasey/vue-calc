@@ -38,7 +38,7 @@
         <div class="buttons">
           <div class="calc-button" @click="buttonClick('ac')">AC</div>
           <div class="calc-button" @click="buttonClick('[+/-]')">[+/-]</div>
-          <div class="calc-button">%</div>
+          <div class="calc-button" @click="buttonClick('%')">%</div>
           <div class="calc-button" @click="buttonClick('/')">/</div>
           <div class="calc-button" @click="buttonClick('7')">7</div>
           <div class="calc-button" @click="buttonClick('8')">8</div>
@@ -52,8 +52,8 @@
           <div class="calc-button" @click="buttonClick('2')">2</div>
           <div class="calc-button" @click="buttonClick('3')">3</div>
           <div class="calc-button" @click="buttonClick('+')">+</div>
-          <div class="calc-button long">0</div>
-          <div class="calc-button">•</div>
+          <div class="calc-button long" @click="buttonClick('0')">0</div>
+          <div class="calc-button" @click="buttonClick('•')">•</div>
           <div class="calc-button" @click="buttonClick('=')">=</div>
         </div>
       </div>
@@ -64,6 +64,7 @@
 <script>
 import { DollarSignIcon, PlusIcon } from "vue-feather-icons";
 import { constants } from "crypto";
+import { parse } from "path";
 
 export default {
   data() {
@@ -139,6 +140,14 @@ export default {
         } else {
           this.calcText = "-" + this.calcText;
         }
+      } else if (number == "•") {
+        if (!this.calcText.includes(".")) {
+          this.calcText += ".";
+        }
+      } else if (number == "%") {
+        if (!this.calcText == "") {
+          this.calcText = parseFloat(this.calcText) * 0.01;
+        }
       } else {
         this.calcText += number;
       }
@@ -165,7 +174,7 @@ export default {
   background: #1d293a;
 
   .calculator {
-    width: 360px;
+    width: 340px;
 
     h1 {
       text-align: right;
@@ -182,7 +191,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px 5px;
+        margin: 5px 5px;
         color: #eaeaea;
         font-weight: 600;
         font-size: 1.4rem;
@@ -192,7 +201,7 @@ export default {
       }
 
       .long {
-        width: 170px;
+        width: 157px;
       }
     }
   }
