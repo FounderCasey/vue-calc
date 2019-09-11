@@ -2,7 +2,8 @@
   <div>
     <div class="calculator">
       <h1 v-if="calcText">{{calcText}}</h1>
-      <h3 class="empty" v-else>Enter numbers</h3>
+      <h3 class="empty" v-else-if="operator">{{ `${nums[0]} ${operator}`}}</h3>
+      <h3 class="empty" v-else-if="!calcText && nums.length == 0">Enter numbers</h3>
       <div class="buttons">
         <div class="calc-button" @click="buttonClick('ac')">AC</div>
         <div class="calc-button" @click="buttonClick('[+/-]')">[+/-]</div>
