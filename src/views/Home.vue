@@ -5,157 +5,75 @@
       <div class="wrapper">
         <p>Select your calculator</p>
         <div class="flexbox">
-          <div class="item">
+          <input type="radio" name="calc" id="basic" value="basic" checked v-model="selected" />
+          <label for="basic" class="item">
             <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <dollar-sign-icon size="1.75x" class="custom-class"></dollar-sign-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
-          <div class="item">
-            <plus-icon size="1.75x" class="custom-class"></plus-icon>
-          </div>
+          </label>
+          <input type="radio" name="calc" id="size_2" value="1" v-model="selected" />
+          <label for="size_2" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_3" value="2" v-model="selected" />
+          <label for="size_3" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_4" value="3" v-model="selected" />
+          <label for="size_4" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_5" value="4" v-model="selected" />
+          <label for="size_5" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_6" value="5" v-model="selected" />
+          <label for="size_6" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_7" value="6" v-model="selected" />
+          <label for="size_7" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
+          <input type="radio" name="calc" id="size_8" value="7" v-model="selected" />
+          <label for="size_8" class="item">
+            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+          </label>
         </div>
       </div>
     </div>
     <div class="calculator-container">
-      <div class="calculator">
-        <h1>{{calcText || "Enter numbers here"}}</h1>
-        <div class="buttons">
-          <div class="calc-button" @click="buttonClick('ac')">AC</div>
-          <div class="calc-button" @click="buttonClick('[+/-]')">[+/-]</div>
-          <div class="calc-button" @click="buttonClick('%')">%</div>
-          <div class="calc-button" @click="buttonClick('/')">/</div>
-          <div class="calc-button" @click="buttonClick('7')">7</div>
-          <div class="calc-button" @click="buttonClick('8')">8</div>
-          <div class="calc-button" @click="buttonClick('9')">9</div>
-          <div class="calc-button" @click="buttonClick('x')">x</div>
-          <div class="calc-button" @click="buttonClick('4')">4</div>
-          <div class="calc-button" @click="buttonClick('5')">5</div>
-          <div class="calc-button" @click="buttonClick('6')">6</div>
-          <div class="calc-button" @click="buttonClick('-')">-</div>
-          <div class="calc-button" @click="buttonClick('1')">1</div>
-          <div class="calc-button" @click="buttonClick('2')">2</div>
-          <div class="calc-button" @click="buttonClick('3')">3</div>
-          <div class="calc-button" @click="buttonClick('+')">+</div>
-          <div class="calc-button long" @click="buttonClick('0')">0</div>
-          <div class="calc-button" @click="buttonClick('•')">•</div>
-          <div class="calc-button" @click="buttonClick('=')">=</div>
-        </div>
-      </div>
+      <BasicCalculator v-if="selected == 'basic'"></BasicCalculator>
+      <h1 v-if="selected != 'basic'">This calculator is coming soon!</h1>
     </div>
   </div>
 </template>
 
 <script>
-import { DollarSignIcon, PlusIcon } from "vue-feather-icons";
+import {
+  DollarSignIcon,
+  PlusIcon,
+  MinusIcon,
+  XIcon,
+  ClockIcon
+} from "vue-feather-icons";
 import { constants } from "crypto";
 import { parse } from "path";
+
+import BasicCalculator from "../components/BasicCalculator";
 
 export default {
   data() {
     return {
-      calcText: "",
-      nums: [],
-      operator: ""
+      selected: "basic"
     };
   },
-  methods: {
-    buttonClick: function(number) {
-      if (number == "+") {
-        if (this.calcText != "") {
-          this.nums.push(this.calcText);
-          this.calcText = "";
-          this.operator = "+";
-        }
-      } else if (number == "-") {
-        if (this.calcText != "") {
-          this.nums.push(this.calcText);
-          this.calcText = "";
-          this.operator = "-";
-        }
-      } else if (number == "x") {
-        if (this.calcText != "") {
-          this.nums.push(this.calcText);
-          this.calcText = "";
-          this.operator = "x";
-        }
-      } else if (number == "/") {
-        if (this.calcText != "") {
-          this.nums.push(this.calcText);
-          this.calcText = "";
-          this.operator = "/";
-        }
-      } else if (number == "ac") {
-        this.calcText = "";
-        this.nums = [];
-        this.operator = "";
-      } else if (number == "=") {
-        if (this.calcText != "" && this.nums.length >= 1) {
-          this.nums.push(this.calcText);
-          this.calcText = "";
-          console.log("Do we make it here?");
-          switch (this.operator) {
-            case "+":
-              this.calcText =
-                parseFloat(this.nums[0]) + parseFloat(this.nums[1]);
-              this.nums = [];
-              break;
-            case "-":
-              this.calcText =
-                parseFloat(this.nums[0]) - parseFloat(this.nums[1]);
-              this.nums = [];
-              break;
-            case "x":
-              this.calcText =
-                parseFloat(this.nums[0]) * parseFloat(this.nums[1]);
-              this.nums = [];
-              break;
-            case "/":
-              this.calcText =
-                parseFloat(this.nums[0]) / parseFloat(this.nums[1]);
-              this.nums = [];
-              break;
-            default:
-              console.log("Present error");
-          }
-        }
-      } else if (number == "[+/-]") {
-        if (this.calcText.includes("-")) {
-          this.calcText = this.calcText.replace("-", "");
-        } else {
-          this.calcText = "-" + this.calcText;
-        }
-      } else if (number == "•") {
-        if (!this.calcText.includes(".")) {
-          this.calcText += ".";
-        }
-      } else if (number == "%") {
-        if (!this.calcText == "") {
-          this.calcText = parseFloat(this.calcText) * 0.01;
-        }
-      } else {
-        this.calcText += number;
-      }
-    }
-  },
+  methods: {},
   components: {
     PlusIcon,
-    DollarSignIcon
+    DollarSignIcon,
+    MinusIcon,
+    XIcon,
+    ClockIcon,
+    BasicCalculator
   }
 };
 </script>
@@ -172,39 +90,6 @@ export default {
   justify-content: center;
   align-items: center;
   background: #1d293a;
-
-  .calculator {
-    width: 340px;
-
-    h1 {
-      text-align: right;
-    }
-
-    .buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      .calc-button {
-        height: 70px;
-        width: 70px;
-        background: #151e2b;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 5px 5px;
-        color: #eaeaea;
-        font-weight: 600;
-        font-size: 1.4rem;
-        &:hover {
-          background: #6c63ff;
-        }
-      }
-
-      .long {
-        width: 157px;
-      }
-    }
-  }
 }
 
 .container {
@@ -238,6 +123,14 @@ export default {
     flex-wrap: wrap;
     justify-content: space-evenly;
 
+    input[type="radio"] {
+      display: none;
+    }
+
+    input[type="radio"]:checked + label {
+      background-color: #6c63ff;
+    }
+
     .item {
       height: 65px;
       width: 65px;
@@ -249,6 +142,7 @@ export default {
 
       &:hover {
         background: #6c63ff;
+        cursor: pointer;
       }
     }
   }
