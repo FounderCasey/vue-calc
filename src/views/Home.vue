@@ -9,31 +9,31 @@
           <label for="basic" class="item">
             <plus-icon size="1.75x" class="custom-class"></plus-icon>
           </label>
-          <input type="radio" name="calc" id="size_2" value="1" v-model="selected" />
+          <input type="radio" name="calc" id="size_2" value="tip" v-model="selected" />
           <label for="size_2" class="item">
-            <clock-icon size="1.75x" class="custom-class"></clock-icon>
+            <dollar-sign-icon size="1.75x" class="custom-class"></dollar-sign-icon>
           </label>
-          <input type="radio" name="calc" id="size_3" value="2" v-model="selected" />
+          <input type="radio" name="calc" id="size_3" value="1" v-model="selected" />
           <label for="size_3" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
-          <input type="radio" name="calc" id="size_4" value="3" v-model="selected" />
+          <input type="radio" name="calc" id="size_4" value="2" v-model="selected" />
           <label for="size_4" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
-          <input type="radio" name="calc" id="size_5" value="4" v-model="selected" />
+          <input type="radio" name="calc" id="size_5" value="3" v-model="selected" />
           <label for="size_5" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
-          <input type="radio" name="calc" id="size_6" value="5" v-model="selected" />
+          <input type="radio" name="calc" id="size_6" value="4" v-model="selected" />
           <label for="size_6" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
-          <input type="radio" name="calc" id="size_7" value="6" v-model="selected" />
+          <input type="radio" name="calc" id="size_7" value="5" v-model="selected" />
           <label for="size_7" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
-          <input type="radio" name="calc" id="size_8" value="7" v-model="selected" />
+          <input type="radio" name="calc" id="size_8" value="6" v-model="selected" />
           <label for="size_8" class="item">
             <clock-icon size="1.75x" class="custom-class"></clock-icon>
           </label>
@@ -42,7 +42,8 @@
     </div>
     <div class="calculator-container">
       <BasicCalculator v-if="selected == 'basic'"></BasicCalculator>
-      <h1 v-if="selected != 'basic'">This calculator is coming soon!</h1>
+      <TipCalculator v-else-if="selected == 'tip'"></TipCalculator>
+      <h1 v-else>This calculator is coming soon!</h1>
     </div>
   </div>
 </template>
@@ -59,6 +60,7 @@ import { constants } from "crypto";
 import { parse } from "path";
 
 import BasicCalculator from "../components/BasicCalculator";
+import TipCalculator from "../components/TipCalculator";
 
 export default {
   data() {
@@ -73,7 +75,8 @@ export default {
     MinusIcon,
     XIcon,
     ClockIcon,
-    BasicCalculator
+    BasicCalculator,
+    TipCalculator
   }
 };
 </script>

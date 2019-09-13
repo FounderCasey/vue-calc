@@ -2,7 +2,7 @@
   <div>
     <div class="calculator">
       <h1 v-if="calcText">{{calcText.toLocaleString()}}</h1>
-      <h1 v-else-if="operator">{{ `${nums[0].toLocaleString()}`}}</h1>
+      <h3 class="empty" v-else-if="operator">{{ `${nums[0].toLocaleString()} ${operator}`}}</h3>
       <h3 class="empty" v-else-if="!calcText && nums.length == 0">Enter numbers</h3>
       <div class="buttons">
         <div class="calc-button" @click="buttonClick('ac')">AC</div>
@@ -52,26 +52,26 @@ export default {
         if (this.calcText != "") {
           this.nums.push(this.calcText);
           this.calcText = "";
-          this.operator = "+";
         }
+        this.operator = "+";
       } else if (number == "-") {
         if (this.calcText != "") {
           this.nums.push(this.calcText);
           this.calcText = "";
-          this.operator = "-";
         }
+        this.operator = "-";
       } else if (number == "x") {
         if (this.calcText != "") {
           this.nums.push(this.calcText);
           this.calcText = "";
-          this.operator = "x";
         }
+        this.operator = "x";
       } else if (number == "/") {
         if (this.calcText != "") {
           this.nums.push(this.calcText);
           this.calcText = "";
-          this.operator = "/";
         }
+        this.operator = "/";
       } else if (number == "ac") {
         this.calcText = "";
         this.nums = [];

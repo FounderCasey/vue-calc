@@ -2,7 +2,7 @@
   <div>
     <div class="calculator">
       <h1 v-if="calcText">{{calcText.toLocaleString()}}</h1>
-      <h1 class="empty" v-else-if="operator">{{ `${nums[0].toLocaleString()} ${operator}`}}</h1>
+      <h3 class="empty" v-else-if="operator">{{ `${nums[0].toLocaleString()} ${operator}`}}</h3>
       <h3 class="empty" v-else-if="!calcText && nums.length == 0">Enter numbers</h3>
       <div class="buttons">
         <div class="calc-button" @click="buttonClick('ac')">AC</div>
