@@ -133,7 +133,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .calculator {
   width: 340px;
   position: relative;
