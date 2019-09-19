@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="calculator">
-      <h1 v-if="tip">{{ `$${tip}` }}</h1>
+      <h1 v-if="tip">{{ `$${tip.toLocaleString()}` }}</h1>
       <h1 v-else>{{"Enter your amout and percent below"}}</h1>
       <input type="number" placeholder="How much is your total?" v-model="total" />
       <input
